@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Form TextMagic{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+        <div class="row">
+           <h2>Please answer to the following questions:</h2>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form action="{{ path('handle_form') }}" method ="post">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Questions:</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <input type="hidden" name="token" value="{{ csrf_token('form-submit') }}">
+                            {% for question in questions %}
+                                <tr>
+                                    <th scope="row">
+                                        <p>{{ question.text }}</p>
+                                        {% for answer in question.answers %}
+                                            <td>
+                                                <div class="form-check">
+                                                    <input name="{{ question.id }}-{{ answer.id }}" class="form-check-input" type="checkbox" id="{{ answer.id }}">
+                                                    <label class="form-check-label" for="{{ question.id }}">
+                                                        {{ answer.text }}
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        {% endfor %}
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

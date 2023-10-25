@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Results{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+        <div class="row">
+           <h2>Your results:</h2>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Correct Questions:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for question in correctQuestions %}
+                            <tr>
+                                <td>{{ question }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Wrong Questions:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for question in incorrectQuestions %}
+                        <tr>
+                            <td>{{ question }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <a href="{{ path('form') }}"><button>Start again</button></a>
+        </div>
+    </div>
+
+{% endblock %}
